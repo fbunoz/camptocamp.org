@@ -42,7 +42,7 @@ CREATE INDEX app_summits_i18n_archives_latest_idx ON app_summits_i18n_archives U
 CREATE INDEX app_summits_i18n_archives_document_i18n_archive_id_idx ON app_summits_i18n_archives USING btree (document_i18n_archive_id);
 
 -- Views --
-CREATE OR REPLACE VIEW summits AS SELECT sa.oid, sa.id, sa.lon, sa.lat, sa.elevation, sa.summit_type, sa.v4_id, sa.maps_info, sa.module, sa.is_protected, sa.redirects_to, sa.geom, sa.geom_wkt FROM app_summits_archives sa WHERE sa.is_latest_version; 
+CREATE OR REPLACE VIEW summits AS SELECT sa.oid, sa.id, sa.lon, sa.lat, sa.elevation, sa.prominence, sa.summit_type, sa.v4_id, sa.maps_info, sa.module, sa.is_protected, sa.redirects_to, sa.geom, sa.geom_wkt FROM app_summits_archives sa WHERE sa.is_latest_version; 
 INSERT INTO "geometry_columns" VALUES ('','public','summits','geom',3,900913,'POINT');
 
 CREATE OR REPLACE VIEW summits_i18n AS SELECT sa.id, sa.culture, sa.name, sa.search_name, sa.description FROM app_summits_i18n_archives sa WHERE sa.is_latest_version;
@@ -51,12 +51,12 @@ CREATE OR REPLACE VIEW summits_i18n AS SELECT sa.id, sa.culture, sa.name, sa.sea
 -- Rules --
 CREATE OR REPLACE RULE insert_summits AS ON INSERT TO summits DO INSTEAD 
 (
-    INSERT INTO app_summits_archives (id, module, is_protected, redirects_to, lon, lat, elevation, summit_type, maps_info, geom_wkt, geom, v4_id, is_latest_version) VALUES (NEW.id, 'summits', NEW.is_protected, NEW.redirects_to, NEW.lon, NEW.lat, NEW.elevation, NEW.summit_type, NEW.maps_info, NEW.geom_wkt, NEW.geom, NEW.v4_id, true)
+    INSERT INTO app_summits_archives (id, module, is_protected, redirects_to, lon, lat, elevation, prominence, summit_type, maps_info, geom_wkt, geom, v4_id, is_latest_version) VALUES (NEW.id, 'summits', NEW.is_protected, NEW.redirects_to, NEW.lon, NEW.lat, NEW.elevation, NEW.summit_type, NEW.maps_info, NEW.geom_wkt, NEW.geom, NEW.v4_id, true)
 );
 
 CREATE OR REPLACE RULE update_summits AS ON UPDATE TO summits DO INSTEAD 
 (
-    INSERT INTO app_summits_archives (id, module, is_protected, redirects_to, lon, lat, elevation, summit_type, maps_info, geom_wkt, geom, v4_id, is_latest_version) VALUES (NEW.id, 'summits', NEW.is_protected, NEW.redirects_to, NEW.lon, NEW.lat, NEW.elevation, NEW.summit_type, NEW.maps_info, NEW.geom_wkt, NEW.geom, NEW.v4_id, true)
+    INSERT INTO app_summits_archives (id, module, is_protected, redirects_to, lon, lat, elevation, prominence, summit_type, maps_info, geom_wkt, geom, v4_id, is_latest_version) VALUES (NEW.id, 'summits', NEW.is_protected, NEW.redirects_to, NEW.lon, NEW.lat, NEW.elevation, NEW.summit_type, NEW.maps_info, NEW.geom_wkt, NEW.geom, NEW.v4_id, true)
 ); 
 
 CREATE OR REPLACE RULE insert_summits_i18n AS ON INSERT TO summits_i18n DO INSTEAD 
