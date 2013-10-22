@@ -4,6 +4,7 @@ all:
       'id': ID
       'snam': 'name'
       'salt': 'elevation'
+      'prom': 'prominence'
       'styp': 'summit_type'
       'range': ranges
       'admin': admin_limits

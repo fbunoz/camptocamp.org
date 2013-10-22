@@ -410,6 +410,7 @@ class summitsActions extends documentsActions
         $this->addListParam($out, 'areas');
         $this->addNameParam($out, 'snam');
         $this->addCompareParam($out, 'salt');
+        $this->addCompareParam($out, 'prom');
         $this->addAroundParam($out, 'sarnd');
         $this->addListParam($out, 'styp');
         $this->addParam($out, 'geom');

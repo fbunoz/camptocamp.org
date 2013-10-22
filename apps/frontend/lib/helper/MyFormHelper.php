@@ -132,7 +132,25 @@ function object_group_tag($object, $fieldname, $options = array())
     $out  = $mandatory 
             ? start_group_tag(sfConfig::get('app_form_input_group_class', 'form-row') . ' mandatory')
             : start_group_tag();
-    $out .= label_tag($fieldname, $label_name, $mandatory, null, $label_id, $no_label);
+    if (!is_array($label_name))
+    {
+        $out .= label_tag($fieldname, $label_name, $mandatory, null, $label_id, $no_label);
+    }
+    else
+    {
+        // Manage multi label : one label is showed, and switching between label is manage by JS (to add into the .js file of the page - titise a gaz plant, I know).
+        // Useful to adapt the label according to the value of another field.
+        foreach ( $label_name as $item )
+        {
+            $label_name_item = _option($item, 'label_name', null);
+            $mandatory_item = _option($item, 'mandatory', $mandatory);
+            $label_id_item = _option($item, 'label_id', $label_id);
+            $no_label_item = _option($item, 'no_label', $no_label);
+            $display_item = _option($item, 'display', 'none');
+            $label_options = _option($item, 'options', array());
+            $out .= label_tag($fieldname, $label_name_item, $mandatory, $label_options, $label_id, $no_label);
+        }
+    }
     $out .= form_error($fieldname) . ' <span>';
 
     // special case where we use BFC: idea is to have the prefix on the left, and the input taking all

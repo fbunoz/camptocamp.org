@@ -11,6 +11,9 @@ include_partial('areas/areas_selector', array('ranges' => $ranges_raw, 'selected
 <?php
 include_partial('summits_filter', array('autofocus' => true));
 echo georef_selector();
+echo '<span data-summit_type-filter="1" style="display:none">' . __('prominence') . '</span>'
+   . '<span data-summit_type-filter="2" style="display:none">' . __('summit_deepness') . '</span>'
+   . '<span data-summit_type-filter="1 2" style="display:none"> ' . elevation_selector('prom') . '</span>';
 ?>
 <br /><br />
 <?php

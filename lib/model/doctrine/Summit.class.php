@@ -97,6 +97,7 @@ class Summit extends BaseSummit
             }
             $nb_id += $nb_name;
             self::buildConditionItem($conditions, $values, $joins, $params_list, 'Compare', $m . '.elevation', 'salt', $join);
+            self::buildConditionItem($conditions, $values, $joins, $params_list, 'Compare', $m . '.prominence', 'prom', $join);
             self::buildConditionItem($conditions, $values, $joins, $params_list, 'List', $m . '.summit_type', 'styp', $join);
             self::buildConditionItem($conditions, $values, $joins, $params_list, 'List', 'si.culture', 'scult', $join_i18n);
             
@@ -412,6 +413,7 @@ class Summit extends BaseSummit
             case 'id':   return 'm.id';
             case 'snam': return $mi . '.search_name';
             case 'salt': return 'm.elevation';
+            case 'prom': return 'm.prominence';
             case 'styp': return 'm.summit_type';
             case 'range': return 'gr.linked_id';
             case 'admin': return 'gd.linked_id';
@@ -428,7 +430,7 @@ class Summit extends BaseSummit
     {
         if ($main_query)
         {
-            $data_fields_list = array('m.elevation', 'm.summit_type', 'm.lon', 'm.lat');
+            $data_fields_list = array('m.elevation', 'm.prominence', 'm.summit_type', 'm.lon', 'm.lat');
             $data_fields_list = array_merge($data_fields_list,
                                             parent::buildGeoFieldsList());
         }

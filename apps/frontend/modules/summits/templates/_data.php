@@ -1,4 +1,7 @@
-<?php use_helper('Field');
+<?php
+use_helper('Field');
+$summit_type = $document->getRaw('summit_type');
+
 // put here meta tags for microdata which would be invalid inside ul tag
 echo microdata_meta('name', $document->getName());
 if (isset($nb_comments) && $nb_comments)
@@ -14,6 +17,11 @@ if (isset($nb_comments) && $nb_comments)
     {
         echo '<li><ul itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">';
         li(field_data_if_set($document, 'elevation', array('suffix' => 'meters', 'microdata' => 'elevation')));
+        if (in_array($summit_type, array(1, 2)))
+        {
+            $prominence_name = ($summit_type == 1 ) ? 'prominence' : 'summit_deepness';
+            li(field_data_if_set($document, 'prominence', array('title' => $prominence_name, 'suffix' => 'meters', 'microdata' => $prominence_name)));
+        }
         li(field_coord_data_if_set($document, 'lon', array('microdata' => 'longitude')));
         li(field_coord_data_if_set($document, 'lat', array('microdata' => 'latitude')));
         li(field_swiss_coords($document));

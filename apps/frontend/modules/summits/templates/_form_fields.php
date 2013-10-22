@@ -1,5 +1,7 @@
 <?php
 use_helper('Object', 'Language', 'Validation', 'MyForm');
+$response = sfContext::getInstance()->getResponse();
+$response->addJavascript('/static/js/summits_edit.js', 'last');
 
 // Here document = summit
 echo '<div>';
@@ -17,6 +19,16 @@ include_partial('documents/oam_coords', array('document' => $document)); // lon,
 echo object_group_tag($document, 'elevation', array('suffix' => 'meters', 'class' => 'short_input', 'type' => 'number'));
 echo object_group_tag($document, 'maps_info', array('class' => 'medium2_input'), true, null, null, '', true);
 echo object_group_dropdown_tag($document, 'summit_type', 'app_summits_summit_types');
+?>
+<div data-summit_type-filter="1 2">
+<?php
+echo object_group_tag($document, 'prominence',
+    array('suffix' => 'meters', 'class' => 'short_input', 'type' => 'number',
+          'label_name' => array(array('label_name' => 'prominence', 'options' => array('data-summit_type-filter' => 1)),
+                                array('label_name' => 'summit_deepness', 'options' => array('data-summit_type-filter' => 2)))));
+?>
+</div>
+<?php
 
 echo form_section_title('Description', 'form_desc', 'preview_desc');
 

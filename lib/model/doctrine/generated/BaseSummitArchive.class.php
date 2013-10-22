@@ -12,6 +12,7 @@ class BaseSummitArchive extends BaseDocumentArchive
         $this->setTableName('app_summits_archives');
 
         $this->hasColumn('summit_archive_id', 'integer', 11);
+        $this->hasColumn('prominence', 'smallint', null);
         $this->hasColumn('summit_type', 'smallint', null);
         $this->hasColumn('maps_info', 'string', 300);
         $this->hasColumn('v4_id', 'smallint', 5);

@@ -88,5 +88,22 @@
   $('#actform').on('click', "input[name='act[]']", function() {
     hide_unrelated_filter_fields();
   });
+  
+  
+  // hide some parts of the editing form depending on selected summit_type 
+  function summit_hide_unrelated_filter_fields() {
+
+    var summit_types = $('#summit_type').val();
+
+    // show/hide data-summit_type-filter tags depending on selected summit_type
+    $('[data-summit_type-filter]').hide();
+    if (!!summit_types) $.each(summit_types, function (i, summit_type) {
+      if (summit_types.length() == 1 || summit_type > 2) $('[data-summit_type-filter~='+ summit_type +']').show();
+    });
+
+  }
+
+  // check fields state every time the activity selection changes
+  $('#summit_type').on('change', summit_hide_unrelated_filter_fields);
 
 })(window.C2C = window.C2C || {}, jQuery);

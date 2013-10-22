@@ -1655,6 +1655,7 @@ all:
       5: raid
       99: other
     filled_criteria:
+      'prom': ''
 
   sites:
     site_types:
@@ -1663,13 +1664,13 @@ all:
       4: boulder
       12: climbing_gym
     filled_criteria:
-      'talt': elevation
-      'rqua': routes_quantity
-      'ttyp': site_types
-      'tmhei': mean_height
-      'tmrat': mean_rating
-      'tprat': equipment_rating
-      'trock': rock_types
+      'talt': ''
+      'rqua': ''
+      'ttyp': ''
+      'tmhei': ''
+      'tmrat': ''
+      'tprat': ''
+      'trock': ''
  
   routes:
     global_ratings:
@@ -1959,6 +1960,8 @@ all:
       'dhei': ''
       'grat': ''
       'erat': ''
+      'orrat': ''
+      'rexpo': ''
       'prat': ''
       'frat': ''
       'arat': ''

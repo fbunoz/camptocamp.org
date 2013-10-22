@@ -11,6 +11,7 @@ class BaseSummit extends BaseDocument
 
         $this->setTableName('summits');
 
+        $this->hasColumn('prominence', 'smallint', null);
         $this->hasColumn('summit_type', 'smallint', null);
         $this->hasColumn('maps_info', 'string', 300);
         $this->hasColumn('v4_id', 'smallint', 5);
