@@ -28,9 +28,7 @@ echo object_group_dropdown_tag($document, 'public_transportation_types', 'app_pa
 ?>
 </div>
 <?php
-echo start_group_tag(), label_tag('cable_car_access'), ' <span>',
-     checkbox_tag('public_transportation_types[]', 9, in_array(9, $document->getRaw('public_transportation_types')),
-                  array('id' => 'cable_car_access')), '</span>', end_group_tag();
+echo object_ungrouped_checkbox_tag($document, 'public_transportation_types', array('value' => 9, 'label_name' => 'cable_car_access'));
 
 echo object_group_dropdown_tag($document, 'snow_clearance_rating', 'mod_parkings_snow_clearance_ratings_list', array('onchange' => 'C2C.hide_parkings_unrelated_fields()'));
 
