@@ -233,7 +233,7 @@ function activities_selector($onclick = false, $use_personalization = false, $fi
 
 function translate_sort_param($label)
 {
-    return str_replace(array(' :', ':'), '', __($label));
+    return str_replace(array(' :', ':'), '', ucfirst(__($label)));
 }
 
 function field_value_selector($name, $conf, $options)

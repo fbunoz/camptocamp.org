@@ -52,7 +52,7 @@
   };
 
   // hide some fields depending onf the activity selected
-  function hide_unrelated_filter_fields() {
+  function act_hide_unrelated_filter_fields() {
 
     var activities = [];
     $.each($("input[name='act[]']:checked"), function() {
@@ -61,12 +61,20 @@
 
     // show/hide data-act-filter tags depending on selected activities
     $('[data-act-filter]').hide();
+    $('option[data-act-filter]').prop('disabled', true);
 
     $('[data-act-filter="none"]').toggle(!!activities);
 
     if (!!activities) $.each(activities, function (i, activity) {
       $('[data-act-filter~='+ activity +']').show();
+      $('option[data-act-filter]').prop('disabled', false);
     });
+    
+    if (activities.length() == 1) {
+      $('option[data-act-filter="multi"]').prop('disabled', true).hide();
+    } else {
+      $('option[data-act-filter="multi"]').prop('disabled', false).show();
+    }
 
     // some configuration should only be available if
     // activity 2 (snow, ice, mixed) is selected
@@ -86,24 +94,35 @@
   }
 
   $('#actform').on('click', "input[name='act[]']", function() {
-    hide_unrelated_filter_fields();
+    act_hide_unrelated_filter_fields();
   });
   
   
   // hide some parts of the editing form depending on selected summit_type 
-  function summit_hide_unrelated_filter_fields() {
+  function summit_type_hide_unrelated_filter_fields() {
 
     var summit_types = $('#summit_type').val();
 
     // show/hide data-summit_type-filter tags depending on selected summit_type
     $('[data-summit_type-filter]').hide();
+    $('option[data-summit_type-filter]').prop('disabled', true);
+    
     if (!!summit_types) $.each(summit_types, function (i, summit_type) {
-      if (summit_types.length() == 1 || summit_type > 2) $('[data-summit_type-filter~='+ summit_type +']').show();
+      if (summit_types.length() == 1)
+      {
+        $('[data-summit_type-filter~='+ summit_type +']').show();
+        $('option[data-summit_type-filter]').prop('disabled', false);
     });
+    
+    if (summit_types.length() == 1) {
+      $('option[data-summit_type-filter="multi"]').prop('disabled', true).hide();
+    } else {
+      $('option[data-summit_type-filter="multi"]').prop('disabled', false).show();
+    }
 
   }
 
-  // check fields state every time the activity selection changes
-  $('#summit_type').on('change', summit_hide_unrelated_filter_fields);
+  // check fields state every time the summit_type selection changes
+  $('#summit_type').on('change', summit_type_hide_unrelated_filter_fields);
 
 })(window.C2C = window.C2C || {}, jQuery);

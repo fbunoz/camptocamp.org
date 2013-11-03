@@ -103,6 +103,9 @@ echo __('route_length') . ' ' . elevation_selector('rlen', 'kilometers');
 ?>
 </div>
 <br />
+<div data-act-filter="1 2 3 4 6 7" style="display:none">
 <?php 
 echo bool_selector_from_list('sub', 'mod_routes_sub_activities_list', 6);
 echo bool_selector_from_list('sub', 'mod_routes_sub_activities_list', 8);
+?>
+</div>

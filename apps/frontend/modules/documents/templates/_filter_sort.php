@@ -14,7 +14,39 @@ if (!isset($orderby_default))
 {
     $orderby_default = '';
 }
-$orderby_options = options_for_select($sort_fields, $orderby_default, array('include_blank' => true));
+
+// add blank option
+$html_options = array('include_blank' => true);
+
+// add remapping infos to remap option values
+$remapping = sfConfig::get('mod_' . $sf_context->getModuleName() . '_sort_remapping');
+if (is_array($remapping))
+{
+    $html_options['remapping'] = $remapping;
+}
+
+// add html attribute for each option
+$attribute_list = sfConfig::get('mod_' . $sf_context->getModuleName() . '_sort_attributes');
+if (is_array($attribute_list))
+{
+    $option_attributes = array();
+    foreach ($attribute_list as $attribute)
+    {
+        $option_value_list = sfConfig::get('mod_' . $sf_context->getModuleName() . '_sort_' . $attribute);
+        foreach ($option_value_list as $option_value => $attribute_value)
+        {
+            if (!isset($option_attributes[$option_value]))
+            {
+                $option_attributes[$option_value] = array();
+            }
+            $option_attributes[$option_value][$attribute] = $attribute_value;
+        }
+    }
+    $html_options['option_attributes'] = $option_attributes;
+}
+
+// orderby tag
+$orderby_options = options_for_select_enhanced($sort_fields, $orderby_default, $html_options);
 echo select_tag('orderby', $orderby_options);
 
 if (!isset($order_default))
