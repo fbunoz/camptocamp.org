@@ -125,8 +125,8 @@ echo object_group_dropdown_tag($document, 'toponeige_technical_rating', 'app_rou
 echo object_group_dropdown_tag($document, 'toponeige_exposition_rating', 'app_routes_toponeige_exposition_ratings');
 echo object_group_dropdown_tag($document, 'labande_ski_rating', 'app_routes_labande_ski_ratings');
 echo object_group_dropdown_tag($document, 'labande_global_rating', 'app_routes_global_ratings');
-echo object_group_dropdown_tag($document, 'sub_activities', 'mod_routes_sub_activities_list',
-                               array('multiple' => true));
+echo object_ungrouped_checkbox_tag($document, 'sub_activities', array('config' => 'mod_routes_sub_activities_list', 'value' => 2));
+echo object_ungrouped_checkbox_tag($document, 'sub_activities', array('config' => 'mod_routes_sub_activities_list', 'value' => 4));
 ?>
 </div>
 
@@ -142,6 +142,13 @@ echo object_group_dropdown_tag($document, 'snowshoeing_rating', 'app_routes_snow
 ?>
 </div>
 
+<div data-act-filter="1 2 3 4 6 7">
+<?php
+echo object_ungrouped_checkbox_tag($document, 'sub_activities', array('config' => 'mod_routes_sub_activities_list', 'value' => 8));
+echo object_ungrouped_checkbox_tag($document, 'sub_activities', array('config' => 'mod_routes_sub_activities_list', 'value' => 6));
+?>
+</div>
+
 </div>
 <div class="clear"></div>
 <?php
@@ -153,7 +160,7 @@ echo object_group_bbcode_tag($document, 'description', null, array('class' => 'm
 echo object_group_bbcode_tag($document, 'remarks', null, array('no_img' => true));
 echo object_group_bbcode_tag($document, 'gear', 'specific gear', array('class' => 'smalltext', 'placeholder' => __('gear_default'), 'no_img' => true));
 
-$backpack_content_list = array('pack_skitouring' => '1',
+$backpack_content_list = array('pack_skitouring' => '1 7',
                                'pack_snow_ice_mixed_easy' => '2',
                                'pack_mountain_climbing_easy' => '3',
                                'pack_rock_climbing_bolted' => '4',
