@@ -1,14 +1,25 @@
 all:
   sort:
+    attributes:
+     - 'data-summit_type-filter'
     criteria:
       'id': ID
       'snam': 'name'
       'salt': 'elevation'
-      'prom': 'prominence'
+      'prom_1': 'prominence'
+      'prom_2': 'summit_deepness'
       'styp': 'summit_type'
       'range': ranges
       'admin': admin_limits
       'country': countries
       'lat': 'location S >> N'
       'lon': 'location W >> E'
+    'data-summit_type-filter':
+      'prom_1': '1'     # 'prominence'
+      'prom_2': '2'     # 'summit_deepness'
+      'styp':   'multi' # 'summit_type'
+    remapping:
+      'prom_1': 'prom' # 'prominence'
+      'prom_2': 'prom' # 'summit_deepness'
     filled_criteria:
+      'prom': ''
