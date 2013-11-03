@@ -49,6 +49,8 @@ all:
       2: never taken
 
   sort:
+    attributes:
+     - 'data-act-filter'
     criteria:
       'id': ID
       'rnam': name 
@@ -69,10 +71,10 @@ all:
       'erat': engagement_rating
       'orrat': objective_risk_rating
       'prat': equipment_rating
+      'rexpo': rock_exposition_rating
       'frat': rock_free_rating
       'rrat': rock_required_rating
       'arat': aid_rating
-      'rexpo': rock_exposition_rating
       'irat': ice_rating
       'mrat': mixed_rating
       'trat': toponeige_technical_rating
@@ -82,6 +84,31 @@ all:
       'hrat': hiking_rating
       'wrat': snowshoeing_rating
       'rlen': route_length
+    'data-act-filter':
+      'act':   'multi'       # activities
+      'maxa':  '1 2 3 4 6 7' # max_elevation
+      'hdif':  '1 2 3 4 6 7' # height_diff_up
+      'ddif':  '1'           # height_diff_down
+      'time':  '1 2 3 4 6 7' # duration
+      'ralt':  '1 2 3 4 5'   # difficulties_start_elevation
+      'dhei':  '1 2 3 4 5'   # difficulties_height
+      'grat':  '2 3 4 5'     # global_rating
+      'erat':  '2 3 4 5'     # engagement_rating
+      'orrat': '2 3 5'       # objective_risk_rating
+      'prat':  '2 3 4 5'     # equipment_rating
+      'rexpo': '3 4'         # rock_exposition_rating
+      'frat':  '3 4'         # rock_free_rating
+      'rrat':  '3 4'         # rock_required_rating
+      'arat':  '3 4'         # aid_rating
+      'irat':  '2 5'         # ice_rating
+      'mrat':  '2 5'         # mixed_rating
+      'trat':  '1'           # toponeige_technical_rating
+      'sexpo': '1'           # toponeige_exposition_rating
+      'lrat':  '1'           # labande_global_rating
+      'srat':  '1'           # labande_ski_rating
+      'hrat':  '6'           # hiking_rating
+      'wrat':  '7'           # snowshoeing_rating
+      'rlen':  '6'           # route_length
     route_criteria: [ 'fac', 'time', 'ralt', 'dhei', 'grat', 'erat', 'orrat', 'prat', 'frat', 'rrat', 'arat', 'rexpo', 'irat', 'mrat', 'trat', 'sexpo', 'lrat', 'srat', 'hrat', 'wrat' ]
     filled_criteria:
       'maxa': malt
