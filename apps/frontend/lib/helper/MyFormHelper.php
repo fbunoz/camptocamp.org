@@ -138,7 +138,7 @@ function object_group_tag($object, $fieldname, $options = array())
     }
     else
     {
-        // Manage multi label : one label is showed, and switching between label is manage by JS (to add into the .js file of the page - titise a gaz plant, I know).
+        // Manage multi label : one label is showed, and switching between label is manage by JS (to add into the .js file of the page - titiz a gaz plant, I know).
         // Useful to adapt the label according to the value of another field.
         foreach ( $label_name as $item )
         {
@@ -175,6 +175,24 @@ function object_group_tag($object, $fieldname, $options = array())
     {
         $out .= '&nbsp;' . __($suffix);
     }
+
+    $out .= end_group_tag();
+
+    return $out;
+}
+
+function object_ungrouped_checkbox_tag($object, $fieldname, $options = array())
+{
+    $config = _option($options, 'config', null);
+    $choices = sfConfig::get($config);
+    $value = _option($options, 'value', null);
+    $label_name = _option($options, 'label_name', $choices[$value]);
+
+    $out  = start_group_tag();
+    $out .= label_tag($fieldname, $label_name, false, null, null, true);
+    $out .= form_error($fieldname . '_' . $value) . ' <span>';
+
+    $out .= checkbox_tag($fieldname . '[]', $value, in_array($value, $document->getRaw($fieldname))) . '</span>';
 
     $out .= end_group_tag();
 
@@ -817,6 +835,73 @@ function options_with_classes_for_select($options = array(), $selected = '', $ht
             )
             {
                 $option_options['selected'] = 'selected';
+            }
+
+            $html .= content_tag('option', $value, $option_options)."\n";
+        }
+    }
+
+    return $html;
+}
+
+
+/**
+ * This function is similar to option_for_select from symfony, except that it allows you
+ * to specify a class for the options (which is class_prefix+value)
+ */
+function options_for_select_enhanced($options = array(), $selected = '', $html_options = array())
+{
+    $html_options = _parse_attributes($html_options);
+
+    if (is_array($selected))
+    {
+        $selected = array_map('strval', array_values($selected));
+    }
+
+    $html = '';
+
+    if ($value = _get_option($html_options, 'include_custom'))
+    {
+        $html .= content_tag('option', $value, array('value' => ''))."\n";
+    }
+    else if (_get_option($html_options, 'include_blank'))
+    {
+        $html .= content_tag('option', '', array('value' => ''))."\n";
+    }
+    
+    $remapping = _option($html_options, 'remapping', array());
+    $option_attributes = _option($html_options, 'option_attributes', array());
+
+    foreach ($options as $key => $value)
+    {
+        if (is_array($value))
+        {
+            $html .= content_tag('optgroup', options_with_classes_for_select($value, $selected, $html_options), array('label' => $key), $class_prefix)."\n";
+        }
+        else
+        {
+            if (isset($remapping[$key]))
+            {
+                $option_value = $remapping[$key];
+            }
+            else
+            {
+                $option_value = $key;
+            }
+            $option_options = array('value' => $option_value);
+
+            if (
+                (is_array($selected) && in_array(strval($key), $selected, true))
+                ||
+                (strval($key) == strval($selected))
+            )
+            {
+                $option_options['selected'] = 'selected';
+            }
+            
+            if (isset($option_attributes[$key]) && is_array($option_attributes[$key]))
+            {
+                $option_options = array_merge($option_options, $option_attributes[$key]);
             }
 
             $html .= content_tag('option', $value, $option_options)."\n";
