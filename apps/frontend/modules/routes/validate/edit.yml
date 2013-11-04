@@ -76,6 +76,12 @@ fields:
   engagement_rating:
     myChoiceValidator:
       config_choice: app_routes_engagement_ratings
+  objective_risk_rating:
+    myChoiceValidator:
+      config_choice: app_routes_objective_risk_ratings
+  rock_exposition_rating:
+    myChoiceValidator:
+      config_choice: app_routes_rock_exposition_ratings
   rock_free_rating:
     myChoiceValidator:
       config_choice: app_routes_rock_free_ratings
