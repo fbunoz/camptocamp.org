@@ -35,7 +35,7 @@ $is_protected = $document->get('is_protected');
                 <li><?php echo button_clear_cache($module, $id) ?></li>
                 <li><?php echo button_associations_history($module, $id) ?></li>
             <?php endif ?>
-            <?php if ($has_rights && !$is_archive && !$redirected): ?>
+            <?php if ($has_rights && !$is_archive && !$redirected && $document->get('summit_type') != 5): ?>
                 <li><?php echo button_refresh_geo_associations($module, $id) ?></li>
             <?php endif ?>
             <?php if ($is_connected && !$redirected && !$is_archive && !$is_protected): ?>
