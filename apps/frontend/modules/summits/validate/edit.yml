@@ -39,7 +39,7 @@ fields:
       max_error:    value must be less than or equal to 10000
       type:         int
       type_error:   value must an integer
-  name:o
+  name:
     required:
       msg:          field cannot be left blank
     sfStringValidator:
